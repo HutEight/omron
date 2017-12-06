@@ -47,11 +47,11 @@ namespace omron_os32c_driver {
 class MeasurementReportHeader : public Serializable
 {
 public:
-  EIP_UDINT scan_count;
+  EIP_UDINT scan_count; // RN_NOTE typedef uint32_t 	EIP_UDINT
   EIP_UDINT scan_rate;
   EIP_UDINT scan_timestamp;
   EIP_UDINT scan_beam_period;
-  EIP_UINT machine_state;
+  EIP_UINT machine_state; // RN_NOTE typedef uint16_t 	EIP_UINT
   EIP_UINT machine_stop_reasons;
   EIP_UINT active_zone_set;
   EIP_WORD zone_inputs;
@@ -68,6 +68,8 @@ public:
   /**
    * From OS32C-DM Ethernet/IP addendum, header is always 56 bytes
    */
+  // RN_NOTE OS32C-DM Ethernet/IP addendum P18
+  // TODO RN_NOTE dose the miller welder has a similar header difinintion somewhere in the documentation?
   virtual size_t getLength() const
   {
     return 56;
@@ -79,6 +81,8 @@ public:
    * @return the writer again
    * @throw std::length_error if the buffer is too small for the header data
    */
+  // TODO RN_NOTE what given buffer?
+
   virtual Writer& serialize(Writer& writer) const
   {
     EIP_UINT reserved = 0;
